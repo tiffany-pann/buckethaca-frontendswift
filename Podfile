@@ -9,8 +9,6 @@ target 'Hack Challenge' do
   pod 'SnapKit'
   pod 'GoogleSignIn'
   pod 'Alamofire'
-  pod 'ButtonProgressBar-iOS'
-  pod 'HTPressableButton'
   pod 'SDWebImage', '~> 5.0'
   pod 'Firebase'
 end
