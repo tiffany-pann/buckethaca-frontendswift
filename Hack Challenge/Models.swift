@@ -37,7 +37,7 @@ struct Event: Codable {
     let image: String
 }
 
-let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoor", "sdhfvsdfv"]
+let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoors", "Clubs", "Sports"]
 
 struct Image: Codable {
     let url: String?
@@ -105,21 +105,6 @@ func convertStringtoUnix(dateInput: String) -> Int {
     
     return dateSt
 }
-
-let allBuckets: [Bucket] = [
-    Bucket(id: 1, description: "Attend Slope Day!"),
-    Bucket(id: 2, description: "Go to the Cornell-Harvard men’s hockey game and throw fish on the ice"),
-    Bucket(id: 3, description: "Take off to NYC for Fall Break, being sure to post on Instagram about it at least twice"),
-    Bucket(id: 4, description: "Sled down Libe Slope during a snowstorm"),
-    Bucket(id: 5, description: "Take Hotel Administration 4300: Introduction to Wines"),
-    Bucket(id: 6, description: "Enroll in BIOEE 1540: Introductory Oceanography as a joke, then fall in love with Bruce Monger and attend every class"),
-    Bucket(id: 7, description: "Order ice cream at the Dairy Bar"),
-    Bucket(id: 8, description: "Climb the rock wall in Bartels Hall"),
-    Bucket(id: 9, description: "Listen to a full chimes concert from the clock tower and guess the songs played"),
-    Bucket(id: 10, description: "Register for classes during Freshman Pre-Enroll, then switch out of every single one by the time Add/Drop ends"),
-    Bucket(id: 11, description: "Wear flip-flops to class in January"),
-    Bucket(id: 12, description: "Skip class to play frisbee on the Arts Quad")
-]
 
 var allBucketswithStatus: [BucketwithStatus] = [
     BucketwithStatus(bucketItem:  Bucket(id: 1, description: "Attend Slope Day!"), status: true),

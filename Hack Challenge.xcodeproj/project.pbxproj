@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4123FC03282577010004DE38 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4123FC02282577010004DE38 /* SearchVC.swift */; };
 		4123FC052825CCEB0004DE38 /* RandomizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4123FC042825CCEB0004DE38 /* RandomizerViewController.swift */; };
+		41379BA52825F80E0011A494 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41379BA42825F80E0011A494 /* GoogleService-Info.plist */; };
 		413A00372820C84F002420A2 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413A00252820C84F002420A2 /* Montserrat-LightItalic.ttf */; };
 		413A00382820C84F002420A2 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413A00262820C84F002420A2 /* Montserrat-Medium.ttf */; };
 		413A00392820C84F002420A2 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 413A00272820C84F002420A2 /* Montserrat-BoldItalic.ttf */; };
@@ -66,6 +67,8 @@
 		3B381F18BE9CADC5EB5A9F9B /* Pods-Hack Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hack Challenge.release.xcconfig"; path = "Target Support Files/Pods-Hack Challenge/Pods-Hack Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		4123FC02282577010004DE38 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		4123FC042825CCEB0004DE38 /* RandomizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizerViewController.swift; sourceTree = "<group>"; };
+		41379BA42825F80E0011A494 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41379BA728262BD90011A494 /* SF-Mono-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Mono-Bold.otf"; sourceTree = "<group>"; };
 		413A00252820C84F002420A2 /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
 		413A00262820C84F002420A2 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		413A00272820C84F002420A2 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 		417E69CB2822011E0005957D /* AestheticsFiles */ = {
 			isa = PBXGroup;
 			children = (
+				41379BA728262BD90011A494 /* SF-Mono-Bold.otf */,
 				41E4BF4F282109A2007089CC /* Theme.swift */,
 				41E300BA281DE8D500E4C327 /* PaddingLabel.swift */,
 				419E4AFD281DF7A9006BC547 /* DOFavoriteButton.swift */,
@@ -248,6 +252,7 @@
 			children = (
 				418FFED02825E24F00AF7DA7 /* GoogleService-Info.plist */,
 				41E30094281B8AA300E4C327 /* SceneDelegate.swift */,
+				41379BA42825F80E0011A494 /* GoogleService-Info.plist */,
 				41E30092281B8AA300E4C327 /* AppDelegate.swift */,
 				41E300A6281B9B5400E4C327 /* Models.swift */,
 				41E300B4281DD43100E4C327 /* TabViewController.swift */,
@@ -390,6 +395,7 @@
 				413A00462820C84F002420A2 /* Montserrat-Italic.ttf in Resources */,
 				413A00482820C84F002420A2 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 				413A00372820C84F002420A2 /* Montserrat-LightItalic.ttf in Resources */,
+				41379BA52825F80E0011A494 /* GoogleService-Info.plist in Resources */,
 				413A00422820C84F002420A2 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				418FFED12825E24F00AF7DA7 /* GoogleService-Info.plist in Resources */,
 			);

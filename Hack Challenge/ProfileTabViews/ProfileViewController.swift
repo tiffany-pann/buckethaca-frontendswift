@@ -27,8 +27,8 @@ class ProfileViewController: UIViewController {
         button.addTarget(self, action: #selector(LogOut), for: .touchUpInside)
         button.contentMode = .scaleAspectFit
         button.setTitle("Sign Out", for: .normal)
-        button.setTitleColor(UIColor.systemGray, for: .normal)
-        button.backgroundColor = .white
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = . systemGray6
         button.layer.shadowColor = UIColor.systemGray.cgColor
         button.layer.shadowOpacity = 1
         button.layer.shadowOffset = CGSize(width: 6, height: 10)
@@ -38,8 +38,13 @@ class ProfileViewController: UIViewController {
     
     let userImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleToFill
-        image.image = UIImage(named: "sokka")
+        image.layer.masksToBounds = true
+        image.layer.cornerRadius = 87.5
+        image.image = UIImage(named: "appa")
+        image.layer.borderColor = UIColor.black.cgColor
+        image.layer.borderWidth = 2
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
 
     }()
@@ -62,13 +67,30 @@ class ProfileViewController: UIViewController {
         return email
     }()
     
+    let contrastView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    var gradientLine: UIView = {
+        let gradientLine = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 20))
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = gradientLine.bounds
+        gradient.colors = [UIColor.profileGreen().cgColor, UIColor.white.cgColor]
+        
+        gradientLine.layer.insertSublayer(gradient, at: 0)
+        return gradientLine
+    }()
+    
     override func viewDidLoad() {
         
 //        userImage.sd_setImage(with: String(returnUserImage()?), placeholderImage: "clubfest")
         
         navigationController?.setNavigationBarHidden(true, animated: false)
-        view.backgroundColor = UIColor.sageAccent()
-        [profileLabel, userLogoutButton, userNameLabel, userImage, userEmailLabel].forEach { subView in
+        view.backgroundColor = UIColor.profileGreen()
+        [contrastView, profileLabel, userLogoutButton, userNameLabel, userImage, userEmailLabel].forEach { subView in
             view.addSubview(subView)
             subView.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -80,22 +102,32 @@ class ProfileViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            userImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            userImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            userImage.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 20),
-            userImage.heightAnchor.constraint(equalToConstant: 200),
+            contrastView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 220),
+            contrastView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contrastView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contrastView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+//            gradientLine.topAnchor.constraint(equalTo: contrastView.topAnchor),
+//            gradientLine.bottomAnchor.constraint(equalTo: contrastView.topAnchor, constant: 100),
+//            gradientLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            gradientLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+    
+            userImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            userImage.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 80),
+            userImage.heightAnchor.constraint(equalToConstant: 175),
+            userImage.widthAnchor.constraint(equalToConstant: 175),
             
             userNameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            userNameLabel.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 50),
+            userNameLabel.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 65),
             userNameLabel.heightAnchor.constraint(equalToConstant: 30),
             
             userEmailLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             userEmailLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 30),
             userEmailLabel.heightAnchor.constraint(equalToConstant: 10),
             
-            userLogoutButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 90),
-            userLogoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -90),
-            userLogoutButton.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 30),
+            userLogoutButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 140),
+            userLogoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -140),
+            userLogoutButton.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 50),
             userLogoutButton.bottomAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 100)
             
             

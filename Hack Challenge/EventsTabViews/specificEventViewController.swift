@@ -37,14 +37,14 @@ class specificEventViewController: UIViewController {
         let title = UILabel()
         title.textAlignment = .left
         title.textColor = .black
-        title.font = UIFont(name: "Montserrat-Medium", size: 40)
+        title.font = UIFont(name: "Montserrat-Medium", size: 25)
         return title
     }()
     
     var locationName: UILabel = {
         let location = UILabel()
         location.textColor = .gray
-        location.font = UIFont(name: "Rockwell-Italic", size: 20)
+        location.font = UIFont(name: "Rockwell-Italic", size: 18)
         return location
     }()
     

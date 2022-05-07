@@ -11,6 +11,7 @@ import Alamofire
 class NetworkManager {
     static let host: String = "http://34.124.124.62"
     
+    
     static func sendToken(token: String, completion: @escaping (User) -> Void) {
         let endpoint = "\(host)/api/login/"
         let params = [
@@ -48,6 +49,26 @@ class NetworkManager {
                     completion(eventsResponse)
                 } else {
                     print("Failed to decode getAllEvents")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func getRandomEvent(completion: @escaping (Event) -> Void) {
+        let endpoint = "\(host)/api/events/random/"
+        AF.request(endpoint, method: .get).validate().responseData { response in
+            debugPrint(response)
+            switch (response.result) {
+            case .success(let data):
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .iso8601
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let eventResponse = try? jsonDecoder.decode(Event.self, from: data) {
+                    completion(eventResponse)
+                } else {
+                    print("Failed to decode getRandomEvent")
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -149,7 +170,7 @@ class NetworkManager {
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
-                }
+                    }
 
             }
         

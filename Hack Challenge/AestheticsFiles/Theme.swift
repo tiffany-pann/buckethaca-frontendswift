@@ -33,4 +33,8 @@ extension UIColor
     class func darkGreen() -> UIColor {
         return UIColor(red: 16/255, green: 154/255, blue: 48/255, alpha: 1)
     }
+    
+    class func profileGreen() -> UIColor {
+        return UIColor(red: 80/255, green: 181/255, blue: 158/255, alpha: 1)
+    }
 }

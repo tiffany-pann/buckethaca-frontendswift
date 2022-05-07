@@ -16,7 +16,16 @@ class RandomizerViewController: UIViewController {
     var index: Int?
     let viewController = ViewController()
     
-    let displayingEvent: Event = Event(id: 1, title: "Hi", hostName: "hi", date: 1222, location: "hi", description: "hi", categories: "hi", type: "hi", image: "https://images-hack-challenge.s3.us-east-2.amazonaws.com/3Z70VPN8J02ET89T.png")
+    var displayingEvent: Event = Event(id: 1, title: "Hi", hostName: "hi", date: 1222, location: "hi", description: "hiasdfsdfsdfsdfsdfsdfasdfasdfasdfasdfhsdjfmhasdjfhkhfjkxcbhjkfghsdfjkhgsfjkghsdfjkghdsjkfhsdfjkghsdfjlkghsdfljkghsdflkghsdfjklhsdlfjkghsdfjklhsdfjklhsdfjkghsdfjklhsdlgjhkasdlksdalasjkdjkasdlasjkdlasjkdfhasjklfhasdjklhasdjkfhasdjklhasdklfhasdjkfhsajkldhasldjkasdjklhskladjfaskldjsjkldasljkdasdjklhasdjkhasdjkhsadjkhasdfjahsdfkashdfjklashfjklkhsdjaflshfkjsdhlksjfajklsdkjlsdajklsdsadjklhasjkldfhasdklfhjskadlfhsadfhskladjhasjklfhasdkljhasdlkasdasjkldsajkdlasdklfasdfasdfasdf", categories: "hi", type: "hi", image: "https://images-hack-challenge.s3.us-east-2.amazonaws.com/3Z70VPN8J02ET89T.png")
+    
+    var skipEventButton: UIButton = {
+        let button = UIButton()
+//        button.setTitle("🅧", for: .normal)
+        button.addTarget(self, action: #selector(showNextEvent), for: .touchUpInside)
+//        button.backgroundColor = UIColor.systemGray
+        button.layer.cornerRadius = 10
+        return button
+    }()
     
     var contrastView: UIView = {
         let contrast = UIView()
@@ -43,7 +52,7 @@ class RandomizerViewController: UIViewController {
         let title = UILabel()
         title.textAlignment = .left
         title.textColor = .black
-        title.font = UIFont(name: "Montserrat-Medium", size: 40)
+        title.font = UIFont(name: "Montserrat-Medium", size: 23)
         return title
     }()
     
@@ -121,18 +130,22 @@ class RandomizerViewController: UIViewController {
     }()
     
     
+    
     override func viewDidLoad() {
+        loadEvent()
         // load view with event info of the current event
         eventImage.sd_setImage(with: URL(string: displayingEvent.image), placeholderImage: UIImage(named: "shimmering"))
         titleName.text = displayingEvent.title
         locationName.text = displayingEvent.location
         hostName.text = "hosted by " + displayingEvent.hostName
         dateName.text = convertUnixToString(date: displayingEvent.date)
-        
+        descriptionView.text = displayingEvent.description
         
         view.backgroundColor = .systemGray6
-        
-        [contrastView, eventImage, middleSquareView, titleName, locationName, dateName, descriptionView, descriptionLabel, hostName, heartButton].forEach { subView in
+        view.bringSubviewToFront(skipEventButton)
+        view.backgroundColor = .white
+        skipEventButton.setImage(UIImage(named: "skip"), for: .normal)
+        [contrastView,eventImage, middleSquareView, titleName, locationName, dateName, descriptionView, descriptionLabel, hostName, heartButton, skipEventButton].forEach { subView in
             subView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(subView)
         }
@@ -175,32 +188,58 @@ class RandomizerViewController: UIViewController {
             descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
             descriptionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5),
-            descriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            descriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             descriptionView.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: -3),
-            descriptionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            descriptionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
+            heartButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+            heartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            heartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            heartButton.trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
             
-            
-            
+            skipEventButton.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: -25),
+            skipEventButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            skipEventButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 250),
+            skipEventButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 350),
+            skipEventButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadEvent()
+    }
+    
+    func loadEvent() {
+        NetworkManager.getRandomEvent { [self] event in
+            self.displayingEvent = event
+            self.eventImage.sd_setImage(with: URL(string: displayingEvent.image), placeholderImage: UIImage(named: "shimmering"))
+            self.titleName.text = displayingEvent.title
+            self.locationName.text = "📍 " + displayingEvent.location
+            self.hostName.text = "🦭 " + displayingEvent.hostName
+            self.dateName.text = "🗓 " + convertUnixToString(date: displayingEvent.date)
+            self.descriptionView.text = displayingEvent.description
+        }
+    }
+    
+    
     @objc func tapped(sender: DOFavoriteButton) {
         if sender.isSelected {
 //            print("button selected")
             // deselect
             sender.deselect()
         } else {
-            // upwrap id
-            if let id = index {
-                NetworkManager.bookmarkEvent(id: index!) { Event in
-                }
-            }
             // select with animation
             // TODO: Post request here to add this event to the users list of bookmarked events
+            NetworkManager.bookmarkEvent(id: displayingEvent.id) { Event in
+            }
             sender.select()
         }
+    }
+    
+    @objc func showNextEvent() {
+        loadEvent()
     }
 
 }

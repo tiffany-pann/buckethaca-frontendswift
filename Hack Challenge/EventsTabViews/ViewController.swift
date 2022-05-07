@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     ]
     
     lazy var shownEvents: [Event] = allEvents
-    let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoor", "sdhfvsdfv"]
+    let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoors", "Clubs", "Sports"]
 
 //    let allCategories: [Category] = [
 //        // TODO: If things break fix this lmao
@@ -36,16 +36,6 @@ class ViewController: UIViewController {
     
     
     var currentIndexPathToUpdate: IndexPath? // We use this for updating and deleting
-    
-    
-    //        Event(id: "2", title: "Club Fest", description: "Come to Club Fest and check out all of the cool clubs that Cornell has to offer! If you're looking for random paragraphs, you've come to the right place. When a random word or a random sentence isn't quite enough, the next logical step is to find a random paragraph. We created the Random Paragraph Generator with you in mind. The process is quite simple. Choose the number of random paragraphs you'd like to see and click the button. Your chosen number of paragraphs will instantly appear.", poster: "Tiffany Pan", location: "Arts Quad", timeStamp: "05/01/2022", filters: [.outdoors], image: UIImage(named: "clubfest")!, date: "May 1st, 2022"),
-    //
-    //        Event(id: "3", title: "Slope Day", description: "She didn't like the food. She never did. She made the usual complaints and started the tantrum he knew was coming. But this time was different. Instead of trying to placate her and her unreasonable demands, he just stared at her and watched her meltdown without saying a word. There once lived an old man and an old woman who were peasants and had to work hard to earn their daily bread. The old man used to go to fix fences and do other odd jobs for the farmers around, and while he was gone the old woman, his wife, did the work of the house and worked in their own little plot of land.", poster: "Tiffany Pan", location: "The Slope", timeStamp: "05/11/2022", filters: [.outdoors], image: UIImage(named:"slopeday")!, date: "May 11th, 2022"),
-    //
-    //        Event(id: "1", title: "Eugene Lee Yang", description: "The answer was within her reach. It was hidden in a box and now that box sat directly in front of her. She'd spent years searching for it and could hardly believe she'd finally managed to find it. She turned the key to unlock the box and then gently lifted the top. She held her breath in anticipation of finally knowing the answer she had spent so much of her time in search of. As the lid came off she could see that the box was empty.", poster: "Kelly Tran", location: "Barton Hall", timeStamp: "04/30/22", filters: [.indoors], image: UIImage(named: "eugene")!, date: "May 7th, 2022"),
-    //    ]
-    
-    
     
     var searchBar: UITextField = {
         let searchBar = UITextField()
@@ -78,6 +68,7 @@ class ViewController: UIViewController {
         gradientLine.layer.insertSublayer(gradient, at: 0)
         return gradientLine
     }()
+    
     lazy var filtersView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -133,6 +124,8 @@ class ViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "OK!", style: UIAlertAction.Style.default, handler: nil))
         
+        searchBar.delegate = self
+        
         loadAllEvents()
 //        refreshData()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
@@ -142,7 +135,7 @@ class ViewController: UIViewController {
         allEventsView.backgroundColor = .clear
         lazy var addButtonImage = UIImage(named: "add")
         addButton.setImage(addButtonImage, for: .normal)
-        searchButton.setImage(UIImage(named: "search icon"), for: .normal)
+        searchButton.setImage(UIImage(named: "green search icon"), for: .normal)
         clearSearchButton.setImage(UIImage(named: "reload"), for: .normal)
         
         //        [allEventsView].forEach { subView in
@@ -240,7 +233,7 @@ class ViewController: UIViewController {
     
     @objc func searchButtonPressed() {
         if let searchingString = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), searchingString != "" {
-            print(searchingString)
+            searchBar.resignFirstResponder()
             NetworkManager.searchEvents(eventName: searchingString, completion: { [self] events in
                 if events.events.isEmpty {
                     self.present(alert, animated: true, completion: nil)
@@ -401,5 +394,13 @@ extension UITableView {
     
 }
 
-
-
+extension ViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("begin editing")
+        textField.tintColor = .blue
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("end editing")
+        textField.tintColor = .clear
+    }
+}

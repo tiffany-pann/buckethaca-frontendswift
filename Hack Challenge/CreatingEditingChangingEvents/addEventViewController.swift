@@ -9,7 +9,7 @@ import UIKit
 
 class addEventViewController: UIViewController, UINavigationControllerDelegate {
     
-    let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoor", "sdhfvsdfv"]
+    let allCategories: [String] = ["Academic", "Indoors", "Libaries", "Outdoors", "Clubs", "Sports"]
 
     
     let lilac = UIColor(red: 93/255, green: 89/255, blue: 94/255, alpha: 0.2)
@@ -382,7 +382,7 @@ class addEventViewController: UIViewController, UINavigationControllerDelegate {
            let date = eventDateInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) ,
            let hostName = eventHostNameInput.text?.trimmingCharacters(in: .whitespacesAndNewlines),
            let location = eventLocationInput.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-           let description = eventLocationInput.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+           let description = eventDescriptionInput.text?.trimmingCharacters(in: .whitespacesAndNewlines),
            let image = imageView.image?.jpegData(compressionQuality: 1)?.base64EncodedString(),
            let category = selectedCategory,
             name != "", date != "", location != "", description != "" {

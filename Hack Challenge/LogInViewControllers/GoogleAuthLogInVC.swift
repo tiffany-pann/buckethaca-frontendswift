@@ -16,6 +16,8 @@ class GoogleAuthLoginVC: ViewController {
     
     let signInButton = GIDSignInButton()
     
+    let logoImage = UIImageView()
+    
     override func viewDidLoad() {
         
         
@@ -26,8 +28,13 @@ class GoogleAuthLoginVC: ViewController {
         label.text = "Welcome, first time with Buckethaca? 🤗"
         label.font = UIFont(name: "Montserrat-Medium", size: 16)
         
+        logoImage.image = UIImage(named: "logo")
+        logoImage.contentMode = .scaleAspectFit
+        logoImage.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoImage)
         view.addSubview(label)
         view.addSubview(signInButton)
+        
         setupConstraints()
     }
     
@@ -39,6 +46,13 @@ class GoogleAuthLoginVC: ViewController {
             make.centerX.equalTo(label)
             make.top.equalTo(label.snp.bottom).offset(30)
         }
+        
+        NSLayoutConstraint.activate([
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            logoImage.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 350),
+            logoImage.heightAnchor.constraint(equalToConstant: 300)
+        ])
     }
     
     @objc func signIn() {
