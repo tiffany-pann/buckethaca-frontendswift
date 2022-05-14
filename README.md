@@ -1,7 +1,7 @@
 # Buckethaca
 ## An app that allows Cornell students to browse, bookmark, and post about upcoming Ithaca events as well as view and checkoff Cornellian-related bucket list items.
 
-**### Backend Repository: https://github.com/chuchutran/hack-challenge**
+### Backend Repository: https://github.com/chuchutran/hack-challenge
 
 # Log in Page, with Google Auth
 <img width="363" alt="image" src="https://user-images.githubusercontent.com/100049615/167527176-7ac60cff-9805-4974-9c3e-19bb7c351ea6.png">
@@ -37,7 +37,7 @@
 
 After logging in with Google Auth, users can browse events upcoming Cornell and Ithaca related events in various ways. There are two filtering options implemented, one being the UICollectionView horizontal scroll bar that filters events by category, and the other being the search bar at the very top. If users would like to share an upcoming event, they can post about them using the post button, where they can attach a photo of the event as well. Users can also view their bucketlist and check off things they've done already. The random event generator allows users to be view random events and see if they might be interested in any of them. 
 
-**# Requirements**
+# Requirements
 1. Used both NSLayoutConstraint and Snapkit
 2. 3 TableViews, 1 CollectionView (Filter Bar, used the same Cell in both filtering when posting events, and picking a category when posting an event)
 3. UITabBarController with 5 tabs
