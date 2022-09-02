@@ -2,6 +2,7 @@
 ## An app that allows Cornell students to browse, bookmark, and post about upcoming Ithaca events as well as view and checkoff Cornellian-related bucket list items.
 
 ### Backend Repository: https://github.com/chuchutran/hack-challenge
+Youtube Demo Link: https://www.youtube.com/watch?v=XSMC325aZXU&ab_channel=TiffanyPan
 
 # Log in Page, with Google Auth
 <img width="363" alt="image" src="https://user-images.githubusercontent.com/100049615/167527176-7ac60cff-9805-4974-9c3e-19bb7c351ea6.png">
